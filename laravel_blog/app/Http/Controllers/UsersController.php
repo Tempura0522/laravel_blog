@@ -14,25 +14,6 @@ class UsersController extends Controller
         //
     }
 
-
-    public function create()
-    {
-        //
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show($id)
-    {
-        //
-    }
-
-
     public function edit(User $user)
     {
         return view('user.edit', ['user' => $user]);
@@ -51,7 +32,9 @@ class UsersController extends Controller
         if($request->image){
             $icon = $request->file('image');
             $filename = time(). '.' . $icon->getClientOriginalName();
-            Image::make($icon)->resize(200,200, function($constraint) { $constraint->aspectRatio();})->save(public_path('/storage/icon/' . $filename));
+            Image::make($icon)->resize(200,200, function($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('/storage/icon/' . $filename));
 
             $user->icon = $filename;
         }

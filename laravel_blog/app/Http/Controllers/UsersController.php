@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -32,20 +33,31 @@ class UsersController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
         return view('user.edit', ['user' => $user]);
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::find($id);
+        $id = $user->id;
+
+        $request->validate([
+           'image' =>  'mimes:jpeg,jpg,png',
+        ]);
+
         $user->nickname = $request->nickname;
+        if($request->image){
+            $icon = $request->file('image');
+            $filename = time(). '.' . $icon->getClientOriginalName();
+            Image::make($icon)->resize(200,200, function($constraint) { $constraint->aspectRatio();})->save(public_path('/storage/icon/' . $filename));
+
+            $user->icon = $filename;
+        }
         $user->save();
 
-        return redirect('user/'.$id.'/edit');
+        return redirect('user/'. $id . '/edit')->with('update_message', 'プロフィールの更新が完了しました');
     }
 
 

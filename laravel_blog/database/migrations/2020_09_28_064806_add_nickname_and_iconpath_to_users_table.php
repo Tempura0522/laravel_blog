@@ -14,8 +14,8 @@ class AddNicknameAndIconpathToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('nickname')->after('name');
-            $table->string('icon')->after('email_verified_at');
+            $table->string('nickname')->after('name')->nullable();
+            $table->string('icon')->after('email_verified_at')->nullable();
         });
     }
 

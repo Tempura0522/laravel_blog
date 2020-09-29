@@ -44,7 +44,7 @@ class UsersController extends Controller
         $id = $user->id;
 
         $request->validate([
-           'image' =>  'mimes:jpeg,jpg,png',
+           'image' =>  'mimes:jpeg,jpg,png | max: 5000',
         ]);
 
         $user->nickname = $request->nickname;

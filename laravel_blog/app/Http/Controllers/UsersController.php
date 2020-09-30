@@ -25,13 +25,13 @@ class UsersController extends Controller
         $id = $user->id;
 
         $request->validate([
-           'image' =>  'mimes:jpeg,jpg,png | max: 5000',
+           'image' =>  'image | mimes:jpeg,png,jpg | max: 5000',
         ]);
 
         $user->nickname = $request->nickname;
         if($request->image){
             $icon = $request->file('image');
-            $filename = time(). '.' . $icon->getClientOriginalName();
+            $filename = $id . time(). '.' . $icon->getClientOriginalName();
             Image::make($icon)->resize(200,200, function($constraint) {
                 $constraint->aspectRatio();
             })->save(public_path('/storage/icon/' . $filename));

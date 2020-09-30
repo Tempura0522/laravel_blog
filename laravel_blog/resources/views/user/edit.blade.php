@@ -32,7 +32,7 @@
                 <input
                     type="file"
                     name="image"
-{{--                    accept=".jpg,.jpeg,.png"--}}
+                    accept=".jpg,.jpeg,.png"
                 >
             </div>
             <div>

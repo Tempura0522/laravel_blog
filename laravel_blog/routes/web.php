@@ -22,3 +22,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//ブログ新規作成画面
+Route::get('/blog/create', 'BlogController@create')->name('blog.create');
+
+//ブログ新規作成機能
+Route::post('/blog/{id}/store', 'BlogController@store')->name('blog.store');
+
+
+

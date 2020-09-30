@@ -66,6 +66,9 @@
                                     </form>
                                 </div>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('blog.create') }}">{{ __('blog.create') }}</a>
+                            </li>
                         @endguest
                     </ul>
                 </div>
